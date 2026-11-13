@@ -21,7 +21,11 @@
   --font: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic UI", "Noto Sans JP", "Noto Sans KR", "Microsoft JhengHei", system-ui, sans-serif;
   color-scheme: dark;
 }
-html, body { margin: 0; height: 100%; }
+html, body { margin: 0; }
+html { height: 100%; }
+body { min-height: 100%; }
+/* 説明を開いて縦に長くなっても、ゲームの画面を縮めずにページをスクロールさせる */
+body > * { flex-shrink: 0; }
 body {
   background: var(--page); color: var(--ink); font-family: var(--font);
   padding: 12px max(16px, env(safe-area-inset-left, 0px)); box-sizing: border-box;
@@ -201,7 +205,7 @@ body[data-ui-lang="LanguageCht"] [data-lang="LanguageCht"] { display: revert; }
     <p>我們不會在遊玩紀錄中另外儲存姓名、帳號資訊或 IP 位址等識別資訊。不過，您輸入的角色名稱會原樣記錄，因此請勿填寫個人資訊。遊玩紀錄僅用於改善問題的選擇方式及猜測準確度。GitHub Pages 會基於安全目的另外記錄訪客的 IP 位址。</p>
   </div>
 </details>
-<p id="caption"><span data-lang="LanguageJpn">非公式のファン作品です。HoYoverse とは関係ありません。</span><span data-lang="LanguageEng">Unofficial fan-made game, not affiliated with HoYoverse.</span><span data-lang="LanguageKor">비공식 팬 제작 게임이며, HoYoverse와는 관계가 없습니다.</span><span data-lang="LanguageCht">非官方粉絲作品，與 HoYoverse 無關。</span><br><span class="build">build 2026-11-13 21:46</span></p>
+<p id="caption"><span data-lang="LanguageJpn">非公式のファン作品です。HoYoverse とは関係ありません。</span><span data-lang="LanguageEng">Unofficial fan-made game, not affiliated with HoYoverse.</span><span data-lang="LanguageKor">비공식 팬 제작 게임이며, HoYoverse와는 관계가 없습니다.</span><span data-lang="LanguageCht">非官方粉絲作品，與 HoYoverse 無關。</span><br><span class="build">build 2026-11-13 21:48</span></p>
 <pre id="error" hidden></pre>
 <pre id="log" hidden></pre>
 
