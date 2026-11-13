@@ -36,6 +36,7 @@ body {
 #bar .label { font-size: 13px; color: var(--muted); }
 #title { font-size: 20px; margin: 0 12px 0 0; color: var(--accent); font-weight: 700; }
 #caption .build { opacity: 0.6; }
+#tagline { order: 2; flex-basis: 100%; margin: -4px 0 0; text-align: center; font-size: 13px; color: var(--muted); }
 #about { max-width: 80ch; width: 100%; font-size: 13px; color: var(--muted); margin: 0; }
 #about summary { cursor: pointer; text-align: center; color: var(--accent); }
 #about p, #about ul { margin: 6px 0; line-height: 1.6; }
@@ -121,6 +122,12 @@ body[data-ui-lang="LanguageCht"] [data-lang="LanguageCht"] { display: revert; }
     <span data-lang="LanguageKor">페이몬은 알고 있어 · 머신러닝판</span>
     <span data-lang="LanguageCht">派蒙知道・機器學習版</span>
   </h1>
+  <p id="tagline">
+    <span data-lang="LanguageJpn">みんなが遊んだデータで、パイモンはこれから賢くなっていきます（現在データを集めています）</span>
+    <span data-lang="LanguageEng">Paimon will get smarter from everyone's games (currently collecting data)</span>
+    <span data-lang="LanguageKor">모두가 플레이한 데이터로 페이몬은 점점 똑똑해질 거예요 (현재 데이터 수집 중)</span>
+    <span data-lang="LanguageCht">派蒙會透過大家的遊玩資料變得越來越聰明（目前正在收集資料）</span>
+  </p>
   <select id="lang" aria-label="Language">
     <option value="LanguageJpn">日本語</option>
     <option value="LanguageEng">English</option>
@@ -194,7 +201,7 @@ body[data-ui-lang="LanguageCht"] [data-lang="LanguageCht"] { display: revert; }
     <p>我們不會記錄姓名、帳號、IP 位址等能辨識你身分的資訊（請勿在角色名字輸入欄填寫個人資訊）。記錄的資料只會用於改善問題的挑選方式與猜測的準確度。</p>
   </div>
 </details>
-<p id="caption"><span data-lang="LanguageJpn">非公式のファン作品です。HoYoverse とは関係ありません。</span><span data-lang="LanguageEng">Unofficial fan-made game, not affiliated with HoYoverse.</span><span data-lang="LanguageKor">비공식 팬 제작 게임이며, HoYoverse와는 관계가 없습니다.</span><span data-lang="LanguageCht">非官方粉絲作品，與 HoYoverse 無關。</span><br><span class="build">build 2026-11-13 21:08</span></p>
+<p id="caption"><span data-lang="LanguageJpn">非公式のファン作品です。HoYoverse とは関係ありません。</span><span data-lang="LanguageEng">Unofficial fan-made game, not affiliated with HoYoverse.</span><span data-lang="LanguageKor">비공식 팬 제작 게임이며, HoYoverse와는 관계가 없습니다.</span><span data-lang="LanguageCht">非官方粉絲作品，與 HoYoverse 無關。</span><br><span class="build">build 2026-11-13 21:16</span></p>
 <pre id="error" hidden></pre>
 <pre id="log" hidden></pre>
 
