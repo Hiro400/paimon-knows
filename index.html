@@ -201,7 +201,7 @@ body[data-ui-lang="LanguageCht"] [data-lang="LanguageCht"] { display: revert; }
     <p>我們不會記錄姓名、帳號、IP 位址等能辨識你身分的資訊（請勿在角色名字輸入欄填寫個人資訊）。記錄的資料只會用於改善問題的挑選方式與猜測的準確度。</p>
   </div>
 </details>
-<p id="caption"><span data-lang="LanguageJpn">非公式のファン作品です。HoYoverse とは関係ありません。</span><span data-lang="LanguageEng">Unofficial fan-made game, not affiliated with HoYoverse.</span><span data-lang="LanguageKor">비공식 팬 제작 게임이며, HoYoverse와는 관계가 없습니다.</span><span data-lang="LanguageCht">非官方粉絲作品，與 HoYoverse 無關。</span><br><span class="build">build 2026-11-13 21:16</span></p>
+<p id="caption"><span data-lang="LanguageJpn">非公式のファン作品です。HoYoverse とは関係ありません。</span><span data-lang="LanguageEng">Unofficial fan-made game, not affiliated with HoYoverse.</span><span data-lang="LanguageKor">비공식 팬 제작 게임이며, HoYoverse와는 관계가 없습니다.</span><span data-lang="LanguageCht">非官方粉絲作品，與 HoYoverse 無關。</span><br><span class="build">build 2026-11-13 21:21</span></p>
 <pre id="error" hidden></pre>
 <pre id="log" hidden></pre>
 
@@ -394,13 +394,33 @@ Copyright © 1994–2017 Lua.org, PUC-Rio.
   // 言語（?lang=LanguageEng など）
   const params = new URLSearchParams(location.search);
   const langSelect = document.getElementById("lang");
-  langSelect.value = params.get("lang") || "LanguageJpn";
+  // 言語：URL の ?lang= → 前に選んだ言語（この端末のブラウザに保存） → ブラウザの言語 → 英語 の順に決める
+  const LANGS = ["LanguageJpn", "LanguageEng", "LanguageKor", "LanguageCht"];
+  function browserLang() {
+    const list = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ""];
+    for (const raw of list) {
+      const l = String(raw).toLowerCase();
+      if (l.startsWith("ja")) return "LanguageJpn";
+      if (l.startsWith("ko")) return "LanguageKor";
+      if (l.startsWith("zh")) return "LanguageCht";   // 簡体字はないので、中国語はすべて繁体字にする
+      if (l.startsWith("en")) return "LanguageEng";
+    }
+    return "LanguageEng";
+  }
+  function savedLang() {
+    try { return localStorage.getItem("paimonKnowsLang"); } catch (e) { return null; }
+  }
+  let lang = params.get("lang");
+  if (!LANGS.includes(lang)) lang = savedLang();
+  if (!LANGS.includes(lang)) lang = browserLang();
+  langSelect.value = lang;
   document.body.dataset.uiLang = langSelect.value;   // 説明文などを、選んだ言語だけ表示する
   {
     const t = document.querySelector('#title [data-lang="' + langSelect.value + '"]');
     if (t) document.title = t.textContent;   // タブの名前も選んだ言語にする
   }
   langSelect.addEventListener("change", () => {
+    try { localStorage.setItem("paimonKnowsLang", langSelect.value); } catch (e) {}
     params.set("lang", langSelect.value);
     location.search = params.toString();
   });
