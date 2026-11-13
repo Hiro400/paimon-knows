@@ -36,6 +36,14 @@ body {
 #bar .label { font-size: 13px; color: var(--muted); }
 #title { font-size: 20px; margin: 0 12px 0 0; color: var(--accent); font-weight: 700; }
 #caption .build { opacity: 0.6; }
+#about { max-width: 80ch; width: 100%; font-size: 13px; color: var(--muted); margin: 0; }
+#about summary { cursor: pointer; text-align: center; color: var(--accent); }
+#about p, #about ul { margin: 6px 0; line-height: 1.6; }
+[data-lang] { display: none; }
+body[data-ui-lang="LanguageJpn"] [data-lang="LanguageJpn"],
+body[data-ui-lang="LanguageEng"] [data-lang="LanguageEng"],
+body[data-ui-lang="LanguageKor"] [data-lang="LanguageKor"],
+body[data-ui-lang="LanguageCht"] [data-lang="LanguageCht"] { display: revert; }
 #frame { position: relative; width: 100%; max-width: 1600px; }
 #stage {
   position: absolute; left: 0; top: 0; width: 1600px; height: 900px; transform-origin: 0 0;
@@ -99,7 +107,55 @@ body {
   </select>
 </div>
 <div id="frame"><div id="stage" aria-label="ゲームの画面"><div id="loading">読み込み中…</div></div></div>
-<p id="caption">非公式のファン作品です。HoYoverse とは関係ありません。 / Unofficial fan-made game, not affiliated with HoYoverse.<br><span class="build">build 2026-11-13 20:39</span></p>
+<details id="about">
+  <summary>
+    <span data-lang="LanguageJpn">このページについて</span>
+    <span data-lang="LanguageEng">About this page</span>
+    <span data-lang="LanguageKor">이 페이지에 대해</span>
+    <span data-lang="LanguageCht">關於本頁面</span>
+  </summary>
+  <div data-lang="LanguageJpn">
+    <p>非公式のファン作品です。HoYoverse とは関係ありません。</p>
+    <p>パイモンの当てる力を上げるために、遊んだ内容を匿名で記録しています。記録するのは次のものだけです。</p>
+    <ul>
+      <li>質問と、それへの答え</li>
+      <li>パイモンが推測したキャラと、当たったかどうか</li>
+      <li>表示している言語と、記録した日時</li>
+    </ul>
+    <p>名前、アカウント、IPアドレスなど、あなたが誰かが分かる情報は記録しません。記録したデータは、質問の選び方や推測の精度を改善するためだけに使います。</p>
+  </div>
+  <div data-lang="LanguageEng">
+    <p>This is an unofficial fan-made game, not affiliated with HoYoverse.</p>
+    <p>To help Paimon guess better, we anonymously record how each game goes. We record only:</p>
+    <ul>
+      <li>the questions asked and your answers</li>
+      <li>the characters Paimon guessed and whether the guess was right</li>
+      <li>the display language and the time of the record</li>
+    </ul>
+    <p>We do not record anything that identifies you, such as your name, account, or IP address. The data is used only to improve how questions are chosen and how accurately Paimon guesses.</p>
+  </div>
+  <div data-lang="LanguageKor">
+    <p>비공식 팬 제작 게임이며, HoYoverse와는 관계가 없습니다.</p>
+    <p>페이몬이 더 잘 맞힐 수 있도록, 플레이 내용을 익명으로 기록합니다. 기록하는 것은 다음뿐입니다.</p>
+    <ul>
+      <li>질문과 그에 대한 답</li>
+      <li>페이몬이 추측한 캐릭터와 정답 여부</li>
+      <li>표시 언어와 기록 일시</li>
+    </ul>
+    <p>이름, 계정, IP 주소 등 당신이 누구인지 알 수 있는 정보는 기록하지 않습니다. 기록한 데이터는 질문을 고르는 방법과 추측의 정확도를 개선하는 데만 사용합니다.</p>
+  </div>
+  <div data-lang="LanguageCht">
+    <p>本作為非官方的粉絲作品，與 HoYoverse 無關。</p>
+    <p>為了讓派蒙猜得更準，我們會匿名記錄遊玩內容。記錄的只有以下項目：</p>
+    <ul>
+      <li>提問的問題與你的回答</li>
+      <li>派蒙猜測的角色，以及是否猜中</li>
+      <li>顯示語言與記錄時間</li>
+    </ul>
+    <p>我們不會記錄姓名、帳號、IP 位址等能辨識你身分的資訊。記錄的資料只會用於改善問題的挑選方式與猜測的準確度。</p>
+  </div>
+</details>
+<p id="caption"><span data-lang="LanguageJpn">非公式のファン作品です。HoYoverse とは関係ありません。</span><span data-lang="LanguageEng">Unofficial fan-made game, not affiliated with HoYoverse.</span><span data-lang="LanguageKor">비공식 팬 제작 게임이며, HoYoverse와는 관계가 없습니다.</span><span data-lang="LanguageCht">非官方粉絲作品，與 HoYoverse 無關。</span><br><span class="build">build 2026-11-13 20:49</span></p>
 <pre id="error" hidden></pre>
 <pre id="log" hidden></pre>
 
@@ -293,6 +349,7 @@ Copyright © 1994–2017 Lua.org, PUC-Rio.
   const params = new URLSearchParams(location.search);
   const langSelect = document.getElementById("lang");
   langSelect.value = params.get("lang") || "LanguageJpn";
+  document.body.dataset.uiLang = langSelect.value;   // 説明文などを、選んだ言語だけ表示する
   langSelect.addEventListener("change", () => {
     params.set("lang", langSelect.value);
     location.search = params.toString();
